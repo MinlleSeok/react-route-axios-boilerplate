@@ -1,13 +1,30 @@
 # react-route-axios-boilerplate
 
+사용되는 패키지
+
+- React.js
+- react-router-dom 라이브러리
+- axios 라이브러리
+
+```json
+"dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.3.0"
+}
+```
+
 ## 상용구 코드 boilerplate
 
 > 컴퓨터 프로그래밍에서 상용구 코드 또는 상용구는 수정하지 않거나 최소한의 수정만을 거쳐 여러 곳에 필수적으로 사용되는 코드를 말한다.  
 > 이와 같은 코드는 최소한의 작업을 하기 위해 많은 분량의 코드를 작성해야 하는 언어에서 자주 사용된다 (출처: 위키백과)
 
-- React.js
-- react-router-dom 라이브러리
-- axios 라이브러리
+
 
 ## app/index.js
 
