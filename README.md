@@ -1,3 +1,112 @@
+# react-route-axios-boilerplate
+
+- React.js
+- react-router-dom 라이브러리
+- axios 라이브러리
+
+## app/index.js
+
+```js
+import React from "react";
+import "./App.css";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import HomeContainer from "../pages/home";
+import AjaxContainer from "../pages/ajax";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={HomeContainer} />
+        <Route exact path="/axios" component={AjaxContainer} />
+        <Route
+          // path 를 따로 정의하지 않으면 모든 상황에 렌더링됨 404 page error 출력
+          render={({ location }) => (
+            <div className="page-404">
+              <h1>error-404</h1>
+              <p>{location.pathname}</p>
+            </div>
+          )}
+        />
+      </Switch>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+```
+
+## axios api 관리
+
+### agent/index.js
+
+```js
+import axios from 'axios';
+
+const Agent = {
+    get_api: () => {
+        return axios.get("https://jsonplaceholder.typicode.com/todos/1")
+                .then(response => response.data)
+                .catch(err => console.log(err));
+    }
+}
+
+export default Agent;
+```
+
+## Container(로직)과 Presenter(뷰) 분리
+
+### AjaxContainer.js
+
+```js
+import React, { useState, useEffect } from 'react';
+import AxiosPresenter from './AxiosPresenter';
+import Agent from '../../agent';
+
+const AxiosContainer = () => {
+
+  const [ state, setState ] = useState({ api_result: null });
+
+  const { api_result } = state;
+
+  const get_api = async () => {
+    const results = await Agent.get_api();
+    setState({ api_result: results });
+  }
+
+  useEffect(() => {
+    get_api();
+  }, []);
+
+  return (api_result ? <AxiosPresenter results={api_result} /> : <div>Loading...</div>);
+};
+
+export default AxiosContainer;
+```
+
+### AxiosPresenter.js
+
+```js
+import React from "react";
+
+const AxiosPresenter = ({ results }) => {
+  return (
+    <div id="Axios">
+      <p>{JSON.stringify(results)}</p>
+    </div>
+  );
+};
+
+export default AxiosPresenter;
+
+```
+
+<!-- ## 구조 structure
+
+```t
+
+``` -->
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
